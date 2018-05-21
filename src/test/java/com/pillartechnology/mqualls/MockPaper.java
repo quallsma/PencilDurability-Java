@@ -12,7 +12,7 @@ public class MockPaper implements PaperInterface {
 	}
 
 	@Override
-	public void addText(String text) {
+	public void appendText(String text) {
 		this.addTextCount++;
 		this.text += text;
 	}

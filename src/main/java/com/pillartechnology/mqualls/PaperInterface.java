@@ -1,6 +1,6 @@
 package com.pillartechnology.mqualls;
 
 public interface PaperInterface {
-	void addText(String text);
+	void appendText(String text);
 	String getText();
 }

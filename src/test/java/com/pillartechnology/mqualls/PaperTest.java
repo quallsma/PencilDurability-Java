@@ -9,20 +9,20 @@ public class PaperTest {
 
 
 	@Test
-	public void addText_shouldAddTextToPaper() {
+	public void appendText_shouldAppendTextToPaper() {
 		Paper paper = new Paper();
 
-		paper.addText("text");
+		paper.appendText("text");
 
 		assertThat(paper.getText(), is("text"));
 	}
 
 	@Test
-	public void addText_shouldAddToText() {
+	public void appendText_shouldAppendMoreTextToPaper() {
 		Paper paper = new Paper();
 
-		paper.addText("sample");
-		paper.addText(" text");
+		paper.appendText("sample");
+		paper.appendText(" text");
 
 		assertThat(paper.getText(), is("sample text"));
 	}

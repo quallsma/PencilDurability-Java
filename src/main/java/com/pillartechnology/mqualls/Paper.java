@@ -11,7 +11,7 @@ public class Paper implements PaperInterface {
 		return text;
 	}
 
-	public void addText(String text) {
+	public void appendText(String text) {
 		this.text += text;
 	}
 }
