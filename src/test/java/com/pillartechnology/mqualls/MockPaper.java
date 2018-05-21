@@ -3,17 +3,16 @@ package com.pillartechnology.mqualls;
 public class MockPaper implements PaperInterface {
 
 	private String text;
-	private Boolean spy;
-	private Integer addTextCount;
+	private Integer appendTextCount;
 
 	public MockPaper(){
 		this.text = "";
-		this.addTextCount = 0;
+		this.appendTextCount = 0;
 	}
 
 	@Override
 	public void appendText(String text) {
-		this.addTextCount++;
+		this.appendTextCount++;
 		this.text += text;
 	}
 
@@ -22,7 +21,7 @@ public class MockPaper implements PaperInterface {
 		return this.text;
 	}
 
-	public Integer getAddTextCount() {
-		return addTextCount;
+	public Integer getAppendTextCount() {
+		return appendTextCount;
 	}
 }
