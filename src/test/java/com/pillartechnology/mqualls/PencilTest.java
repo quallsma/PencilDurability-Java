@@ -11,15 +11,16 @@ public class PencilTest {
 
 	private MockPaper paper;
 
+	private Pencil pencil;
+
 	@Before
 	public void setUp() {
 		paper = new MockPaper();
+		pencil = new Pencil();
 	}
 
 	@Test
 	public void write_shouldWriteTextOnPaper() {
-		Pencil pencil = new Pencil();
-
 		pencil.write( paper, "She sells sea shells");
 
 		assertThat( paper.getAppendTextCount(), is(1));
@@ -28,8 +29,6 @@ public class PencilTest {
 
 	@Test
 	public void write_shouldWriteMoreTextOnThePaper() {
-		Pencil pencil = new Pencil();
-
 		pencil.write( paper,"She sells sea shells");
 		pencil.write( paper, " down by the sea shore");
 
@@ -38,27 +37,29 @@ public class PencilTest {
 	}
 
 	@Test
-	public void constructor_shouldConstructPencilWithPointDurability() {
-		Pencil pencil = new Pencil(10);
-
-		assertThat(pencil.getPointDurability(), is(10));
-	}
-
-	@Test
 	public void constructor_shouldConstructPencilWithDefaultPointDurabilityFromEmptyConstructor() {
-		Pencil pencil = new Pencil();
-
 		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY));
 	}
 
 	@Test
-	public void write_shouldDegradePointDurabilityUntilDullPoint() {
-		Pencil pencil = new Pencil(5);
+	public void write_shouldDegradePointDurabilityUntilDullPointWithGivenPointDurability() {
+		pencil.setPointDurability(5);
 
 		pencil.write(paper, "write");
 
 		assertThat(pencil.getPointDurability(), is(0));
 		assertThat(paper.getAppendTextCount(), is(1));
 		assertThat(paper.getText(), is("write"));
+	}
+
+	@Test
+	public void write_shouldDegradePointDurabiltyAndWriteWhiteSpacesWhenFullyDegraded() {
+		pencil.setPointDurability(3);
+
+		pencil.write(paper, "write");
+
+		assertThat(pencil.getPointDurability(), is(0));
+		assertThat(paper.getAppendTextCount(), is(1));
+		assertThat(paper.getText(), is("wri  "));
 	}
 }

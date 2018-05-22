@@ -10,17 +10,26 @@ public class Pencil {
 		this.pointDurability = DEFAULT_POINT_DURABILITY;
 	}
 
-	public Pencil(Integer pointDurability) {
-		this.pointDurability = pointDurability;
-	}
-
 	public void write(PaperInterface paper, String text) {
-		paper.appendText(text);
+		String textForPaper = "";
 
-		this.pointDurability-=text.length();
+		for(char character : text.toCharArray()){
+			if(pointDurability > 0){
+				textForPaper += character;
+				pointDurability--;
+			} else {
+				textForPaper+=" ";
+			}
+		}
+
+		paper.appendText(textForPaper);
 	}
 
 	public Integer getPointDurability() {
 		return pointDurability;
+	}
+
+	public void setPointDurability(Integer pointDurability) {
+		this.pointDurability = pointDurability;
 	}
 }
