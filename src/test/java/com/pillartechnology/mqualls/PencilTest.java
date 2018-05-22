@@ -42,24 +42,29 @@ public class PencilTest {
 	}
 
 	@Test
-	public void write_shouldDegradePointDurabilityUntilDullPointWithGivenPointDurability() {
-		pencil.setPointDurability(5);
-
-		pencil.write(paper, "write");
-
-		assertThat(pencil.getPointDurability(), is(0));
-		assertThat(paper.getAppendTextCount(), is(1));
-		assertThat(paper.getText(), is("write"));
-	}
-
-	@Test
-	public void write_shouldDegradePointDurabiltyAndWriteWhiteSpacesWhenFullyDegraded() {
+	public void write_shouldDegradePointDurabilityAndWriteWhiteSpacesWhenFullyDegraded() {
 		pencil.setPointDurability(3);
 
 		pencil.write(paper, "write");
 
 		assertThat(pencil.getPointDurability(), is(0));
-		assertThat(paper.getAppendTextCount(), is(1));
 		assertThat(paper.getText(), is("wri  "));
+	}
+
+	@Test
+	public void write_shouldNotDegradePointDurabilityWhenGivenEitherWhiteSpaceOrNewLine() {
+		pencil.write(paper, "text \nhere");
+
+		assertThat(pencil.getPointDurability(), is(92));
+	}
+
+	@Test
+	public void write_shouldDegradeTwiceAsMuchForCapitalLetters() {
+		pencil.setPointDurability(4);
+
+		pencil.write(paper, "Text");
+
+		assertThat(pencil.getPointDurability(), is(0));
+		assertThat(paper.getText(), is("Tex "));
 	}
 }

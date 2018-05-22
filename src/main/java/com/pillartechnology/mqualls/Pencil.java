@@ -16,7 +16,13 @@ public class Pencil {
 		for(char character : text.toCharArray()){
 			if(pointDurability > 0){
 				textForPaper += character;
-				pointDurability--;
+				if(!(character == ' ' || character == '\n'))
+				{
+					if(Character.isUpperCase(character))
+						pointDurability-=2;
+					else
+						pointDurability--;
+				}
 			} else {
 				textForPaper+=" ";
 			}
