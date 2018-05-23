@@ -2,13 +2,13 @@ package com.pillartechnology.mqualls;
 
 public class Pencil {
 
-	private static final int DEFAULT_POINT_DURABILITY = 40000;
+	private static final Integer DEFAULT_POINT_DURABILITY = 40000;
 	private static final String WHITE_SPACE = " ";
 
 	private Integer pointDurability;
 	private Integer lengthValue;
 
-	public Pencil(int defaultPointDurability, int defaultLengthValue) {
+	public Pencil(Integer defaultPointDurability, Integer defaultLengthValue) {
 		setPointDurabilityToDefault(defaultPointDurability);
 		this.lengthValue = defaultLengthValue;
 	}
@@ -71,7 +71,7 @@ public class Pencil {
 		}
 	}
 
-	private void setPointDurabilityToDefault(int defaultPointDurability) {
+	private void setPointDurabilityToDefault(Integer defaultPointDurability) {
 		this.pointDurability = defaultPointDurability;
 	}
 
