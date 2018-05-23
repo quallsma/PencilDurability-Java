@@ -7,7 +7,8 @@ import static org.hamcrest.Matchers.*;
 
 public class PencilTest {
 
-	private static final int DEFAULT_POINT_DURABILITY = 100;
+	private static final int DEFAULT_POINT_DURABILITY = 40000;
+	private static final int DEFAULT_LENGTH_VALUE = 100;
 
 	private MockPaper paper;
 
@@ -55,7 +56,7 @@ public class PencilTest {
 	public void write_shouldNotDegradePointDurabilityWhenGivenEitherWhiteSpaceOrNewLine() {
 		pencil.write(paper, "text \nhere");
 
-		assertThat(pencil.getPointDurability(), is(92));
+		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY - 8));
 	}
 
 	@Test
@@ -66,5 +67,37 @@ public class PencilTest {
 
 		assertThat(pencil.getPointDurability(), is(0));
 		assertThat(paper.getText(), is("Tex "));
+	}
+
+	@Test
+	public void sharpen_shouldResetThePointDurabilityToDefaultValue() {
+		pencil.setPointDurability(0);
+
+		pencil.sharpen();
+
+		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY));
+	}
+
+	@Test
+	public void sharpen_shouldConstructPencilWithDefaultLengthValue() {
+		assertThat(pencil.getLengthValue(), is(DEFAULT_LENGTH_VALUE));
+	}
+
+	@Test
+	public void sharpen_shouldReducePencilLengthValue() {
+		pencil.sharpen();
+
+		assertThat(pencil.getLengthValue(), is(DEFAULT_LENGTH_VALUE - 1));
+	}
+
+	@Test
+	public void sharpen_shouldNotResetPointDurabilityIfPencilIsTooShort() {
+		pencil.setLengthValue(0);
+		pencil.setPointDurability(0);
+
+		pencil.sharpen();
+
+		assertThat(pencil.getLengthValue(), is(0));
+		assertThat(pencil.getPointDurability(), is(0));
 	}
 }
