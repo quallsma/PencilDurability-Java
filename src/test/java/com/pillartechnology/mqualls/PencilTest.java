@@ -17,7 +17,7 @@ public class PencilTest {
 	@Before
 	public void setUp() {
 		paper = new MockPaper();
-		pencil = new Pencil();
+		pencil = new Pencil(DEFAULT_POINT_DURABILITY, DEFAULT_LENGTH_VALUE);
 	}
 
 	@Test

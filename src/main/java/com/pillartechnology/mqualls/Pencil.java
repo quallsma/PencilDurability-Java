@@ -1,19 +1,16 @@
 package com.pillartechnology.mqualls;
 
-import com.sun.deploy.util.StringUtils;
-
 public class Pencil {
 
 	private static final int DEFAULT_POINT_DURABILITY = 40000;
-	private static final int DEFAULT_LENGTH_VALUE = 100;
 	private static final String WHITE_SPACE = " ";
 
 	private Integer pointDurability;
 	private Integer lengthValue;
 
-	public Pencil() {
-		setPointDurabilityToDefault();
-		this.lengthValue = DEFAULT_LENGTH_VALUE;
+	public Pencil(int defaultPointDurability, int defaultLengthValue) {
+		setPointDurabilityToDefault(defaultPointDurability);
+		this.lengthValue = defaultLengthValue;
 	}
 
 	public Integer getPointDurability() {
@@ -40,12 +37,12 @@ public class Pencil {
 		StringBuilder textForPaper = new StringBuilder();
 
 		for(char character : text.toCharArray()){
-			textForPaper.append(getCharacterToAppend(textForPaper, character));
+			textForPaper.append(getCharacterToAppend(character));
 		}
 		return textForPaper.toString();
 	}
 
-	private String getCharacterToAppend(StringBuilder textForPaper, char character) {
+	private String getCharacterToAppend(char character) {
 		if(isPointDurable()){
 			DegradePointDurability(character);
 			return String.valueOf(character);
@@ -69,13 +66,13 @@ public class Pencil {
 
 	public void sharpen() {
 		if(canPencilBeSharpen()){
-			setPointDurabilityToDefault();
+			setPointDurabilityToDefault(DEFAULT_POINT_DURABILITY);
 			lengthValue--;
 		}
 	}
 
-	private void setPointDurabilityToDefault() {
-		this.pointDurability = DEFAULT_POINT_DURABILITY;
+	private void setPointDurabilityToDefault(int defaultPointDurability) {
+		this.pointDurability = defaultPointDurability;
 	}
 
 	private boolean canPencilBeSharpen() {
