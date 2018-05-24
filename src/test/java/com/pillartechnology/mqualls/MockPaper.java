@@ -21,6 +21,11 @@ public class MockPaper implements PaperInterface {
 		return this.text;
 	}
 
+	@Override
+	public Integer findLastOccurrence(String instance) {
+		return null;
+	}
+
 	public Integer getAppendTextCount() {
 		return appendTextCount;
 	}
