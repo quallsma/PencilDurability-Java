@@ -38,4 +38,13 @@ public class PaperTest {
 
 		assertThat(actual, is(59));
 	}
+
+	@Test
+	public void replaceWithWhiteSpace_shouldReplaceCharacterWithWhiteSpce() {
+		paper.appendText("erase");
+
+		paper.eraseCharacterAt(2);
+
+		assertThat(paper.getText(), is("er se"));
+	}
 }
