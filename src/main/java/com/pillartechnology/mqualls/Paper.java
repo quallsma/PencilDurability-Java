@@ -1,6 +1,9 @@
 package com.pillartechnology.mqualls;
 
 public class Paper implements PaperInterface {
+
+	private static final Character WHITE_SPACE = ' ';
+
 	private String text;
 
 	public Paper() {
@@ -21,7 +24,7 @@ public class Paper implements PaperInterface {
 
 	public void eraseCharacterAt(Integer index) {
 		StringBuilder originalText = new StringBuilder(text);
-		originalText.setCharAt(index, ' ');
+		originalText.setCharAt(index, WHITE_SPACE);
 
 		this.text = originalText.toString();
 	}

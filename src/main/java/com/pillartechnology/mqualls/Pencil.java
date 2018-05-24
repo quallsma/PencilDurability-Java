@@ -29,8 +29,22 @@ public class Pencil {
 		this.lengthValue = lengthValue;
 	}
 
-	public void write(PaperInterface paper, String text) {
+	public void write(String text, PaperInterface paper) {
 		paper.appendText(getTextToAppendToPaper(text));
+	}
+
+	public void sharpen() {
+		if(canPencilBeSharpen()){
+			setPointDurabilityToDefault(DEFAULT_POINT_DURABILITY);
+			lengthValue--;
+		}
+	}
+
+	public void erase(String instance, PaperInterface paper) {
+		Integer lastOccurrenceOfInstance = paper.findLastOccurrence(instance);
+		for(int index = 0; index < instance.length(); index++){
+			paper.eraseCharacterAt(lastOccurrenceOfInstance + index);
+		}
 	}
 
 	private String getTextToAppendToPaper(String text) {
@@ -62,13 +76,6 @@ public class Pencil {
 
 	private boolean isPointDurable() {
 		return pointDurability > 0;
-	}
-
-	public void sharpen() {
-		if(canPencilBeSharpen()){
-			setPointDurabilityToDefault(DEFAULT_POINT_DURABILITY);
-			lengthValue--;
-		}
 	}
 
 	private void setPointDurabilityToDefault(Integer defaultPointDurability) {

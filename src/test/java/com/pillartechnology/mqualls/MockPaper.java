@@ -4,10 +4,14 @@ public class MockPaper implements PaperInterface {
 
 	private String text;
 	private Integer appendTextCount;
+	private Integer findLastOccurrenceCount;
+	private Integer eraseCharacterAtCount;
 
 	public MockPaper(){
 		this.text = "";
 		this.appendTextCount = 0;
+		this.findLastOccurrenceCount = 0;
+		this.eraseCharacterAtCount = 0;
 	}
 
 	public String getText() {
@@ -20,14 +24,26 @@ public class MockPaper implements PaperInterface {
 	}
 
 	public Integer findLastOccurrence(String instance) {
-		return null;
+		findLastOccurrenceCount++;
+		return text.lastIndexOf(instance);
+	}
+
+	public void eraseCharacterAt(Integer index) {
+		StringBuilder originalText = new StringBuilder(text);
+		originalText.setCharAt(index, ' ');
+		this.text = originalText.toString();
+		eraseCharacterAtCount++;
 	}
 
 	public Integer getAppendTextCount() {
 		return appendTextCount;
 	}
 
-	public void eraseCharacterAt(Integer index) {
+	public Integer getFindLastOccurrenceCOunt() {
+		return findLastOccurrenceCount;
+	}
 
+	public Integer getEraseCharacterAtCount() {
+		return eraseCharacterAtCount;
 	}
 }

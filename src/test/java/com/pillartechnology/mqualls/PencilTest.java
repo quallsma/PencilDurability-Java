@@ -22,7 +22,7 @@ public class PencilTest {
 
 	@Test
 	public void write_shouldWriteTextOnPaper() {
-		pencil.write( paper, "She sells sea shells");
+		pencil.write("She sells sea shells", paper);
 
 		assertThat( paper.getAppendTextCount(), is(1));
 		assertThat( paper.getText(), is("She sells sea shells"));
@@ -30,8 +30,8 @@ public class PencilTest {
 
 	@Test
 	public void write_shouldWriteMoreTextOnThePaper() {
-		pencil.write( paper,"She sells sea shells");
-		pencil.write( paper, " down by the sea shore");
+		pencil.write("She sells sea shells", paper);
+		pencil.write(" down by the sea shore", paper);
 
 		assertThat( paper.getAppendTextCount(), is(2));
 		assertThat( paper.getText(), is("She sells sea shells down by the sea shore"));
@@ -46,7 +46,7 @@ public class PencilTest {
 	public void write_shouldDegradePointDurabilityAndWriteWhiteSpacesWhenFullyDegraded() {
 		pencil.setPointDurability(3);
 
-		pencil.write(paper, "write");
+		pencil.write("write", paper);
 
 		assertThat(pencil.getPointDurability(), is(0));
 		assertThat(paper.getText(), is("wri  "));
@@ -54,7 +54,7 @@ public class PencilTest {
 
 	@Test
 	public void write_shouldNotDegradePointDurabilityWhenGivenEitherWhiteSpaceOrNewLine() {
-		pencil.write(paper, "text \nhere");
+		pencil.write("text \nhere", paper);
 
 		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY - 8));
 	}
@@ -63,7 +63,7 @@ public class PencilTest {
 	public void write_shouldDegradeTwiceAsMuchForCapitalLetters() {
 		pencil.setPointDurability(4);
 
-		pencil.write(paper, "Text");
+		pencil.write("Text", paper);
 
 		assertThat(pencil.getPointDurability(), is(0));
 		assertThat(paper.getText(), is("Tex "));
@@ -99,5 +99,28 @@ public class PencilTest {
 
 		assertThat(pencil.getLengthValue(), is(0));
 		assertThat(pencil.getPointDurability(), is(0));
+	}
+
+	@Test
+	public void erase_shouldEraseWordFromPaper() {
+		pencil.write("How much wood would a woodchuck chuck if a woodchuck could chuck wood?", paper);
+
+		pencil.erase("chuck", paper);
+
+		assertThat(paper.getText(), is("How much wood would a woodchuck chuck if a woodchuck could       wood?"));
+		assertThat(paper.getFindLastOccurrenceCOunt(), is(1));
+		assertThat(paper.getEraseCharacterAtCount(), is(5));
+	}
+
+	@Test
+	public void erase_shouldEraseWordFromPaperAfterFirstErase() {
+		pencil.write("How much wood would a woodchuck chuck if a woodchuck could chuck wood?", paper);
+
+		pencil.erase("chuck", paper);
+		pencil.erase("chuck", paper);
+
+		assertThat(paper.getText(), is("How much wood would a woodchuck chuck if a wood      could       wood?"));
+		assertThat(paper.getFindLastOccurrenceCOunt(), is(2));
+		assertThat(paper.getEraseCharacterAtCount(), is(10));
 	}
 }
