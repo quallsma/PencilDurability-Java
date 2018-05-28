@@ -7,10 +7,12 @@ public class Pencil {
 
 	private Integer pointDurability;
 	private Integer lengthValue;
+	private Integer eraserDurability;
 
-	public Pencil(Integer defaultPointDurability, Integer defaultLengthValue) {
+	public Pencil(Integer defaultPointDurability, Integer defaultLengthValue, Integer eraserDurability) {
 		setPointDurabilityToDefault(defaultPointDurability);
 		this.lengthValue = defaultLengthValue;
+		this.eraserDurability = eraserDurability;
 	}
 
 	public Integer getPointDurability() {
@@ -27,6 +29,10 @@ public class Pencil {
 
 	public void setLengthValue(Integer lengthValue) {
 		this.lengthValue = lengthValue;
+	}
+
+	public Integer getEraserDurability() {
+		return eraserDurability;
 	}
 
 	public void write(String text, PaperInterface paper) {

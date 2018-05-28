@@ -9,6 +9,7 @@ public class PencilTest {
 
 	private static final int DEFAULT_POINT_DURABILITY = 40000;
 	private static final int DEFAULT_LENGTH_VALUE = 100;
+	private static final int DEFAULT_ERASER_DURABILITY = 100;
 
 	private MockPaper paper;
 
@@ -17,7 +18,14 @@ public class PencilTest {
 	@Before
 	public void setUp() {
 		paper = new MockPaper();
-		pencil = new Pencil(DEFAULT_POINT_DURABILITY, DEFAULT_LENGTH_VALUE);
+		pencil = new Pencil(DEFAULT_POINT_DURABILITY, DEFAULT_LENGTH_VALUE, DEFAULT_ERASER_DURABILITY);
+	}
+
+	@Test
+	public void constructWithDefaultValues() {
+		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY));
+		assertThat(pencil.getLengthValue(), is(DEFAULT_LENGTH_VALUE));
+		assertThat(pencil.getEraserDurability(), is(DEFAULT_ERASER_DURABILITY));
 	}
 
 	@Test
@@ -35,11 +43,6 @@ public class PencilTest {
 
 		assertThat( paper.getAppendTextCount(), is(2));
 		assertThat( paper.getText(), is("She sells sea shells down by the sea shore"));
-	}
-
-	@Test
-	public void constructor_shouldConstructPencilWithDefaultPointDurabilityFromEmptyConstructor() {
-		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY));
 	}
 
 	@Test
@@ -76,11 +79,6 @@ public class PencilTest {
 		pencil.sharpen();
 
 		assertThat(pencil.getPointDurability(), is(DEFAULT_POINT_DURABILITY));
-	}
-
-	@Test
-	public void sharpen_shouldConstructPencilWithDefaultLengthValue() {
-		assertThat(pencil.getLengthValue(), is(DEFAULT_LENGTH_VALUE));
 	}
 
 	@Test
