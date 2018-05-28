@@ -121,4 +121,14 @@ public class PencilTest {
 		assertThat(paper.getFindLastOccurrenceCOunt(), is(2));
 		assertThat(paper.getEraseCharacterAtCount(), is(10));
 	}
+
+	@Test
+	public void erase_shouldEraseInReverseOrder() {
+		pencil.setEraserDurability(3);
+		pencil.write("Buffalo Bill", paper);
+
+		pencil.erase("Bill", paper);
+
+		assertThat(paper.getText(), is("Buffalo B   "));
+	}
 }

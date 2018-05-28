@@ -35,6 +35,10 @@ public class Pencil {
 		return eraserDurability;
 	}
 
+	public void setEraserDurability(Integer eraserDurability) {
+		this.eraserDurability = eraserDurability;
+	}
+
 	public void write(String text, PaperInterface paper) {
 		paper.appendText(getTextToAppendToPaper(text));
 	}
@@ -48,8 +52,10 @@ public class Pencil {
 
 	public void erase(String instance, PaperInterface paper) {
 		Integer lastOccurrenceOfInstance = paper.findLastOccurrence(instance);
-		for(int index = 0; index < instance.length(); index++){
+
+		for(int index = instance.length() - 1; index >= 0 && eraserDurability > 0; index--){
 			paper.eraseCharacterAt(lastOccurrenceOfInstance + index);
+			eraserDurability--;
 		}
 	}
 
