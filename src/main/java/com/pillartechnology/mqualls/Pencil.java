@@ -59,6 +59,16 @@ public class Pencil {
 		}
 	}
 
+	public void edit(String word, PaperInterface paper) {
+		Integer openSpaceIndex = paper.findOpenSpace();
+		char[] chars = word.toCharArray();
+
+		for(int index = 0; index < word.length() ;index++) {
+			paper.editAt(chars[index], openSpaceIndex + index);
+		}
+
+	}
+
 	private String getTextToAppendToPaper(String text) {
 		StringBuilder textForPaper = new StringBuilder();
 

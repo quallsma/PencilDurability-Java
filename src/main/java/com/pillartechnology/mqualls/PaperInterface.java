@@ -9,4 +9,8 @@ public interface PaperInterface {
 	Integer findLastOccurrence(String instance);
 
 	void eraseCharacterAt(Integer index);
+
+	Integer findOpenSpace();
+
+	void editAt(char character, Integer index);
 }

@@ -23,9 +23,22 @@ public class Paper implements PaperInterface {
 	}
 
 	public void eraseCharacterAt(Integer index) {
+		editAt(WHITE_SPACE, index);
+	}
+
+	public Integer findOpenSpace() {
+		return text.indexOf("  ") + 1;
+	}
+
+	public void editAt(char character, Integer index) {
 		StringBuilder originalText = new StringBuilder(text);
-		originalText.setCharAt(index, WHITE_SPACE);
+		character = getCharacterToReplaceWith(character, index);
+		originalText.setCharAt(index, character);
 
 		this.text = originalText.toString();
+	}
+
+	private char getCharacterToReplaceWith(char character, Integer index){
+		return character == WHITE_SPACE || text.charAt(index) == WHITE_SPACE ? character : '@';
 	}
 }

@@ -131,4 +131,22 @@ public class PencilTest {
 
 		assertThat(paper.getText(), is("Buffalo B   "));
 	}
+
+	@Test
+	public void edit_ShouldReplaceEmptySpaceWithWord() {
+		pencil.write("An       a day keeps the doctor away", paper);
+
+		pencil.edit("onion", paper);
+
+		assertThat(paper.getText(), is("An onion a day keeps the doctor away"));
+	}
+
+	@Test
+	public void edit_ShouldReplaceEmptySpaceWithWordAndReplaceOccupiedSpaceWithSymbol() {
+		pencil.write("An       a day keeps the doctor away", paper);
+
+		pencil.edit("artichoke", paper);
+
+		assertThat(paper.getText(), is("An artich@k@ay keeps the doctor away"));
+	}
 }

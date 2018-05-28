@@ -35,6 +35,22 @@ public class MockPaper implements PaperInterface {
 		eraseCharacterAtCount++;
 	}
 
+	public Integer findOpenSpace() {
+		return text.indexOf("  ") + 1;
+	}
+
+	public void editAt(char character, Integer index) {
+		StringBuilder originalText = new StringBuilder(text);
+		character = getCharacterToReplaceWith(character, index);
+		originalText.setCharAt(index, character);
+
+		this.text = originalText.toString();
+	}
+
+	private char getCharacterToReplaceWith(char character, Integer index){
+		return character == ' ' || text.charAt(index) == ' ' ? character : '@';
+	}
+
 	public Integer getAppendTextCount() {
 		return appendTextCount;
 	}

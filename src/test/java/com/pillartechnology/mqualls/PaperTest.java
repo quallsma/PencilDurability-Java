@@ -47,4 +47,27 @@ public class PaperTest {
 
 		assertThat(paper.getText(), is("er se"));
 	}
+
+	@Test
+	public void findOpenSpace_shouldReturnIndexForOpenSpace() {
+		paper.appendText("An apple a day       the doctor away");
+
+		assertThat(paper.findOpenSpace(), is(15));
+	}
+
+	@Test
+	public void editAt_shouldReplaceCharacterAtIndexWithGivenCharacter() {
+		paper.appendText(" pple");
+		paper.editAt('A', 0);
+
+		assertThat(paper.getText(), is("Apple"));
+	}
+
+	@Test
+	public void editAt_shouldReplaceCharacterAtIndexWithSymbolIfCharacterIsOccupied() {
+		paper.appendText("Apple");
+		paper.editAt('B', 0);
+
+		assertThat(paper.getText(), is("@pple"));
+	}
 }
